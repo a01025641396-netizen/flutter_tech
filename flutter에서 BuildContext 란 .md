@@ -1,0 +1,32 @@
+1. BuildContext의 정의와 역할
+위젯의 주소: BuildContext는 현재 위젯이 트리 구조 상 어디에 위치해 있는지에 대한 정보를 담고 있습니다.
+
+Element Tree의 참조: 기술적으로 BuildContext는 위젯을 구성하는 Element 객체 그 자체입니다. 위젯은 불변(Immutable)이지만, Element는 트리 내의 위치를 유지하며 위젯과 렌더링 객체를 연결합니다.
+
+상위 위젯 탐색: Theme.of(context), MediaQuery.of(context), Navigator.of(context) 등과 같이 트리 위쪽에 존재하는 위젯의 데이터에 접근할 때 사용됩니다.
+
+2. 주요 사용 예시
+① 공통 데이터 접근 (Theme, MediaQuery)
+앱의 스타일 정보나 화면 크기 정보를 가져올 때, 현재 위치(context)를 기준으로 가장 가까운 상위의 관련 위젯을 찾습니다.
+
+Dart
+@override
+Widget build(BuildContext context) {
+  return Container(
+    // context를 통해 상위 Theme 위젯에서 주 색상 정보를 가져옴
+    color: Theme.of(context).primaryColor, 
+    // context를 통해 현재 화면의 너비를 가져옴
+    width: MediaQuery.of(context).size.width * 0.5,
+  );
+}
+② 페이지 이동 및 알림 (Navigator, ScaffoldMessenger)
+화면 전환이나 스낵바(Snackbar)를 띄울 때, 어떤 위치에서 이 명령을 수행하는지 알려주기 위해 사용됩니다.
+
+Dart
+ElevatedButton(
+  onPressed: () {
+    // 현재 위치(context)를 기준으로 새로운 화면으로 이동
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage()));
+  },
+  child: Text('이동하기'),
+)
