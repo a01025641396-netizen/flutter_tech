@@ -1,0 +1,2 @@
+Flutter에서 무한 스크롤을 구현하는 방법은 무엇인가요?
+ScrollController(스크롤컨트롤러)를 사용하여 리스트 위젯의 상태를 감시합니다. controller.addListener(컨트롤러 리스너)를 통해 현재 스크롤 위치(position.pixels)가 최대 스크롤 범위(position.maxScrollExtent)에 도달했는지 확인합니다. 조건이 맞으면 추가 데이터를 가져오는 비동기 함수를 호출하고 리스트를 업데이트합니다.
